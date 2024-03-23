@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_smorest import Api
+from flask_migrate import Migrate
 from datetime import datetime
 from controller import *
 import pytz, os
@@ -16,11 +17,12 @@ def create_app():
         datetime.now(timezone)
     
     db.init_app(app)
+    migrate = Migrate(app, db)
     jwt_config.init_app(app)
     api = Api(app)
 
-    with app.app_context():
-        db.create_all()
+    # with app.app_context():
+    #     db.create_all()
         # populate_data()
 
     blueprints = [
