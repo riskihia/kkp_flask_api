@@ -2,3 +2,4 @@ note.txt
 venv/
 .venv/
 __pycache__/
+.flaskenv
