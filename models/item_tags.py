@@ -1,5 +1,4 @@
-from db import db
-
+from util.config import db
 
 class ItemsTags(db.Model):
     __tablename__ = "items_tags"

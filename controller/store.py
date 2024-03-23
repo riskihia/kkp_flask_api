@@ -5,15 +5,16 @@ from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from schemas import StoreSchema
 
 
-from db import db
+from util.config import db
+
 from models import StoreModel
 
-blp = Blueprint("Stores", __name__, description="Operations on stores")
+store_blp = Blueprint("Stores", __name__, description="Operations on stores")
 
 
-@blp.route("/store/<string:store_id>")
+@store_blp.route("/store/<string:store_id>")
 class Store(MethodView):
-    @blp.response(200, StoreSchema)
+    @store_blp.response(200, StoreSchema)
     def get(cls, store_id):
         store = StoreModel.query.get_or_404(store_id)
         return store
@@ -25,14 +26,14 @@ class Store(MethodView):
         return {"message": "Store deleted"}, 200
 
 
-@blp.route("/store")
+@store_blp.route("/store")
 class StoreList(MethodView):
-    @blp.response(200, StoreSchema(many=True))
+    @store_blp.response(200, StoreSchema(many=True))
     def get(cls):
         return StoreModel.query.all()
 
-    @blp.arguments(StoreSchema)
-    @blp.response(201, StoreSchema)
+    @store_blp.arguments(StoreSchema)
+    @store_blp.response(201, StoreSchema)
     def post(cls, store_data):
         store = StoreModel(**store_data)
         try:

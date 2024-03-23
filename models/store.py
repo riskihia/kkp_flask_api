@@ -1,5 +1,4 @@
-from db import db
-
+from util.config import db
 
 class StoreModel(db.Model):
     __tablename__ = "stores"

@@ -1,5 +1,4 @@
-from db import db
-
+from util.config import db
 
 class ItemModel(db.Model):
     __tablename__ = "items"
