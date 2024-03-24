@@ -9,5 +9,6 @@ class UserSchema(Schema):
 class MushroomSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str()
-    path = fields.Str()
+    type = fields.Str()
+    path = fields.Str(dump_only=True)
     ext = fields.Str()

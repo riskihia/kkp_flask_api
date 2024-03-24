@@ -38,7 +38,7 @@ class MushroomModel(db.Model, TimeStamp):
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True, nullable=False)
     type = Column(String(80), nullable=False)
-    path = Column(String(80), nullable=False)
+    path = Column(String(80), nullable=True)
     ext = Column(String(80), nullable=True)
     contents = db.relationship("ContentModel", back_populates="mushroom", lazy="dynamic")
 

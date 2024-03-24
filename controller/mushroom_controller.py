@@ -1,4 +1,5 @@
 from flask.views import MethodView
+from flask import request
 from flask_smorest import Blueprint
 from schemas import MushroomSchema
 from util.example_response import GetAllMushroom, PostMushroom
@@ -28,4 +29,6 @@ class Mushroom(MethodView):
     @mushroom_blp.response(200, example=PostMushroom)
     @mushroom_blp.response(422, example=None)
     def post(self, mushroom_data):
-        return MushroomService().post_mushroom(mushroom_data)
+        mushroom_data = dict(request.form)
+        mushroom_image = request.files.get('image')  # Ambil file gambar dari permintaan
+        return MushroomService().post_mushroom(mushroom_data, mushroom_image)
