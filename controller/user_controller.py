@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from passlib.hash import pbkdf2_sha256
@@ -7,6 +7,7 @@ from flask_jwt_extended import (
     get_jwt,
     jwt_required,
 )
+from service.user_service import UserService
 
 from util.config import db
 
@@ -22,53 +23,16 @@ user_blp = Blueprint("Users", "users", description="Operations on users")
 class UserRegister(MethodView):
     @user_blp.arguments(UserSchema)
     def post(self, store_data):
-        username = store_data["username"]
-        password = store_data["password"]
-
-        # Cek apakah pengguna sudah ada di database
-        user = (
-            UserModel.query.filter(UserModel.username == store_data["username"])
-            .first()
-        )
-
-        if user is None:
-            # Buat pengguna baru dan simpan ke database
-            new_user = UserModel(**store_data)
-            db.session.add(new_user)
-            db.session.commit()
-
-            user = UserModel.query.filter(
-                UserModel.username == store_data["username"]
-            ).first()
-            # Perbarui nilai store_data["token"] dengan token baru yang dibuat
-            store_data["token"] = create_access_token(identity=user.username)
-            new_token = store_data["token"]
-            user.token = new_token
-            db.session.commit()
-
-            response = {
-                "error": False,
-                "message": "User successfully registered",
-                "data": store_data,
-            }
-            return jsonify(response), 201
-        
-        abort(401, message="Username already exists.")
+        # return store_data
+        return UserService.register(store_data)
 
 
 @user_blp.route("/login")
 class UserLogin(MethodView):
     @user_blp.arguments(UserSchema)
     def post(self, user_data):
-        user = UserModel.query.filter(
-            UserModel.username == user_data["username"]
-        ).first()
-
-        if user and pbkdf2_sha256.verify(user_data["password"], user.password):
-            access_token = create_access_token(identity=user.id)
-            return {"access_token": access_token}, 200
-
-        abort(401, message="Invalid credentials.")
+        return UserService.login(user_data)
+        
 
 @user_blp.route("/logout")
 class UserLogout(MethodView):

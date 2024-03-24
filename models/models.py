@@ -29,7 +29,7 @@ class UserModel(db.Model, TimeStamp):
 
     id = Column(Integer, primary_key=True)
     username = Column(String(80), unique=True, nullable=False)
-    password = Column(String(80), nullable=False)
+    password = Column(Text, nullable=False)
     token = Column(Text, nullable=True)
 
 class UserMushroomModel(db.Model, TimeStamp):
