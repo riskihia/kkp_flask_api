@@ -50,22 +50,7 @@ def inedible_list():
 
     return mushroom_list
 
-def insert_mushrooms():
-    edible = edible_list()
-    inedible = inedible_list()
-    for item in edible:
-        mushroom_edible = MushroomModel(
-            name = item,
-            type = "edible"
-        )
-        db.session.add(mushroom_edible)
-    
-    for item in inedible:
-        mushroom_inedible = MushroomModel(
-            name = item,
-            type = "inedible"
-        )
-        db.session.add(mushroom_inedible)
+
 
 def insert_edible():
     edible_mushrooms = MushroomModel.query.filter_by(type='edible').all()
@@ -94,11 +79,14 @@ def generate_dummy_data():
 
     # Generate dummy data for inedible mushrooms
     for name in inedible_mushrooms:
+        poison_names = ["Cyanide", "Amanitin", "Orellanine", "Gyromitrin", "Tetrodotoxin"]
+        poison_name = random.choice(poison_names)
         mushroom_data = {
             "name": name,
             "type": "inedible",
             "content": {
-                "poison": str(random.randint(50, 100)),  # Generate random values for demonstration
+                "poison_name": poison_name,
+                "amount": str(random.randint(50, 100))  # Generate random values for demonstration
             }
         }
         inedible_data.append(mushroom_data)
@@ -108,6 +96,44 @@ def generate_dummy_data():
 
     return dataset
 
-# Example usage
-dummy_data = generate_dummy_data()
-print(dummy_data)
+def insert_mushrooms():
+    dataset = generate_dummy_data()
+    
+    for item in dataset:
+        mushroom = MushroomModel(
+            name=item['name'],
+            type=item['type']
+        )
+        db.session.add(mushroom)
+
+        if item['type'] == 'edible':
+            edible = EdibleModel(
+                kalori=item['content']['kalori'],
+                lemak=item['content']['lemak'],
+                natrium=item['content']['natrium'],
+                kalium=item['content']['kalium'],
+                karbohidrat=item['content']['karbohidrat'],
+                mushroom=mushroom
+            )
+            db.session.add(edible)
+        elif item['type'] == 'inedible':
+            inedible = InedibleModel(
+                poison_name=item['content']['poison_name'],
+                amount=item['content']['amount'],
+                mushroom=mushroom
+            )
+            db.session.add(inedible)
+
+    db.session.commit()
+
+# def insert_mushrooms():
+#     dataset = generate_dummy_data()
+    
+#     for item in dataset:
+#         mushroom_edible = MushroomModel(
+#             name = item['name'],
+#             type = item["type"]
+#         )
+#         db.session.add(mushroom_edible)
+    
+#     db.session.commit()

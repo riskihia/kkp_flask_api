@@ -61,7 +61,7 @@ class EdibleModel(db.Model, TimeStamp):
     lemak = Column(Double, nullable=True)
     natrium = Column(Double, nullable=True)
     kalium = Column(Double, nullable=True)
-    Karbohidrat = Column(Double, nullable=True)
+    karbohidrat = Column(Double, nullable=True)
 
     mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
     mushroom = db.relationship("MushroomModel", back_populates="edibles")
@@ -69,7 +69,8 @@ class EdibleModel(db.Model, TimeStamp):
 class InedibleModel(db.Model, TimeStamp):
     __tablename__ = "inedibles"
     id = Column(Integer, primary_key=True)
-    poison = Column(Double, nullable=True)
+    poison_name = Column(String(80), nullable=True)
+    amount = Column(Double, nullable=True)
 
     mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
     mushroom = db.relationship("MushroomModel", back_populates="inedibles")

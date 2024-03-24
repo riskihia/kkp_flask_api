@@ -6,7 +6,7 @@ from controller import *
 import pytz, os
 from util.config import db, Config
 from util import jwt_config
-from util.dummy_data import generate_dummy_data
+from util.dummy_data import insert_mushrooms
 from schemas import UserSchema, MushroomSchema
 
 def create_app():
@@ -24,8 +24,9 @@ def create_app():
     api = Api(app)
 
     with app.app_context():
+        db.drop_all()
         db.create_all()
-        generate_dummy_data()
+        insert_mushrooms()
 
     blueprints = [
         user_controller.user_blp,
