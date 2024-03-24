@@ -1,8 +1,7 @@
 from flask.views import MethodView
 from flask_smorest import Blueprint
-from models import MushroomModel
 from schemas import MushroomSchema
-from flask import jsonify, request
+from util.example_response import GetAllMushroom, PostMushroom
 # from util.example_response import (
 #     GetLahanExample,
 #     PostLahanExample,
@@ -20,13 +19,13 @@ mushroom_blp = Blueprint(
 @mushroom_blp.route("/mushroom")
 class Mushroom(MethodView):
     # @jwt_required()
-    @mushroom_blp.response(200, MushroomSchema(many=True))
-    # @mushroom_blp.response(200, example=GetLahanExample)
+    @mushroom_blp.response(200, example=GetAllMushroom)
     def get(self):
         return MushroomService().get_all_mushroom()
 
     # @jwt_required()
     @mushroom_blp.arguments(MushroomSchema)
-    # @mushroom_blp.response(201, example=PostLahanExample)
+    @mushroom_blp.response(200, example=PostMushroom)
+    @mushroom_blp.response(422, example=None)
     def post(self, mushroom_data):
         return MushroomService().post_mushroom(mushroom_data)
