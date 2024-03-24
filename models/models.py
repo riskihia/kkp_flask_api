@@ -32,6 +32,16 @@ class UserModel(db.Model, TimeStamp):
     password = Column(String(80), nullable=False)
     token = Column(Text, nullable=True)
 
+class UserMushroomModel(db.Model, TimeStamp):
+    __tablename__ = "user_mushrooms"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(80), unique=True, nullable=False)
+    path = Column(String(80), nullable=True)
+    isEdible = Column(Boolean, nullable=True)
+    description = Column(Text, nullable=True)
+
+
 class MushroomModel(db.Model, TimeStamp):
     __tablename__ = "mushrooms"
 
@@ -39,11 +49,11 @@ class MushroomModel(db.Model, TimeStamp):
     name = Column(String(80), unique=True, nullable=False)
     type = Column(String(80), nullable=False)
     path = Column(String(80), nullable=True)
-    ext = Column(String(80), nullable=True)
-    contents = db.relationship("ContentModel", back_populates="mushroom", lazy="dynamic")
+    edibles = db.relationship("EdibleModel", back_populates="mushroom", lazy="dynamic")
+    inedibles = db.relationship("InedibleModel", back_populates="mushroom", lazy="dynamic")
 
-class ContentModel(db.Model, TimeStamp):
-    __tablename__ = "contents"
+class EdibleModel(db.Model, TimeStamp):
+    __tablename__ = "edibles"
 
     id = Column(Integer, primary_key=True)
     kalori = Column(Double, nullable=True)
@@ -53,5 +63,12 @@ class ContentModel(db.Model, TimeStamp):
     Karbohidrat = Column(Double, nullable=True)
 
     mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
+    mushroom = db.relationship("MushroomModel", back_populates="edibles")
 
-    mushroom = db.relationship("MushroomModel", back_populates="contents")
+class InedibleModel(db.Model, TimeStamp):
+    __tablename__ = "inedibles"
+    id = Column(Integer, primary_key=True)
+    poison = Column(Double, nullable=True)
+
+    mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
+    mushroom = db.relationship("MushroomModel", back_populates="inedibles")
