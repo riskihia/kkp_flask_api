@@ -6,6 +6,7 @@ from controller import *
 import pytz, os
 from util.config import db, Config
 from util import jwt_config
+from util.dummy_data import generate_dummy_data
 from schemas import UserSchema, MushroomSchema
 
 def create_app():
@@ -21,6 +22,10 @@ def create_app():
     migrate = Migrate(app, db)
     jwt_config.init_app(app)
     api = Api(app)
+
+    with app.app_context():
+        db.create_all()
+        generate_dummy_data()
 
     blueprints = [
         user_controller.user_blp,
