@@ -6,6 +6,7 @@ from controller import *
 import pytz, os
 from util.config import db, Config
 from util import jwt_config
+from schemas import UserSchema, MushroomSchema
 
 def create_app():
     app = Flask(__name__)
@@ -21,15 +22,9 @@ def create_app():
     jwt_config.init_app(app)
     api = Api(app)
 
-    # with app.app_context():
-    #     db.create_all()
-        # populate_data()
-
     blueprints = [
-        item.item_blp,
-        store.store_blp,
-        tag.tag_blp,
-        user.user_blp,
+        user_controller.user_blp,
+        mushroom_controller.mushroom_blp,
     ]
 
     for bp in blueprints:
