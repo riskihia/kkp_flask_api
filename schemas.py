@@ -6,9 +6,8 @@ class UserSchema(Schema):
     password = fields.Str(required=True, load_only=True)
     token = fields.String(dump_only=True)
 
+
 class MushroomSchema(Schema):
     id = fields.Int(dump_only=True)
     name = fields.Str()
     type = fields.Str()
-    path = fields.Str(dump_only=True)
-    ext = fields.Str()

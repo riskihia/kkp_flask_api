@@ -14,39 +14,6 @@ class MushroomService:
     def __init__(self):
         pass
 
-    def post_mushroom(self, mushroom_data, mushroom_image):
-        # current_user = get_jwt_identity()
-        try:
-            if mushroom_image:  # Pastikan ada gambar yang diunggah
-                # Simpan file gambar ke sistem penyimpanan (misalnya: direktori lokal)
-                image_path = os.path.join('static', mushroom_image.filename)
-                print(image_path)
-                domain = "http://localhost:5000/"
-
-                # Menggabungkan path dengan string domain
-                
-                mushroom_image.save(image_path)
-                
-                # Ubah path ke URL
-                temp_path = url_for('static', filename=mushroom_image.filename)
-                mushroom_data['path'] = urljoin(domain, temp_path)
-
-            else:
-                # Jika tidak ada gambar yang diunggah, hentikan program dan kembalikan respons yang sesuai
-                abort(400, message="No image uploaded")
-            new_mushroom = MushroomModel(**mushroom_data)
-            db.session.add(new_mushroom)
-            db.session.commit()
-
-            return {"error": False, "message": "Mushroom added successfully"}
-        except IntegrityError as e:
-            # Jika user_id tidak valid
-            abort(400, message="User id not valid"+ str(e))
-        except SQLAlchemyError as e:
-            # Kesalahan umum saat menyisipkan item
-            print("SQLAlchemy Error:", str(e))  # Cetak detail kesalahan
-            abort(500, message="An error occurred while inserting item: " + str(e))
-
     def get_all_mushroom(self):
         try:
             mushroom = MushroomModel.query.filter(MushroomModel.deleted_at.is_(None)).all()
@@ -59,5 +26,30 @@ class MushroomService:
                 "data": mushroom_schema.dump(mushroom),
             }
             return jsonify(response_data), 200
+        except Exception as e:
+            print(e)
+
+    def get_mushroom_by_name(self, name):
+        try:
+            mushroom = MushroomModel.query.filter_by(name=name).first()
+            mushroom_schema = MushroomSchema()
+
+            if not mushroom:
+                mushroom = MushroomModel.query.filter_by(id=name).first()
+                if not mushroom:
+                    response_data = {
+                        "error": True,
+                        "message": "Mushroom name is invalid"
+                    }
+                    return jsonify(response_data), 200
+                    
+
+            response_data = {
+                "error": False,
+                "message": "Data mushroom fetched successfully",
+                "data": mushroom_schema.dump(mushroom),
+            }
+            return jsonify(response_data), 200
+            
         except Exception as e:
             print(e)

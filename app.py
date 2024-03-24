@@ -30,6 +30,7 @@ def create_app():
 
     blueprints = [
         user_controller.user_blp,
+        user_mushroom_controller.user_mushroom_blp,
         mushroom_controller.mushroom_blp,
     ]
 
