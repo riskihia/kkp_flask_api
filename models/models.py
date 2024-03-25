@@ -39,7 +39,7 @@ class UserMushroomModel(db.Model, TimeStamp):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(80), unique=True, nullable=False)
-    path = Column(String(80), nullable=True)
+    path = Column(String(250), nullable=True)
     isEdible = Column(Boolean, nullable=True)
     description = Column(Text, nullable=True)
     

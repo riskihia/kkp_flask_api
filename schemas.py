@@ -6,6 +6,9 @@ class UserSchema(Schema):
     password = fields.Str(required=True, load_only=True)
     token = fields.String(dump_only=True)
 
+class UserMushroomSchema(Schema):
+    name = fields.Str(required=True)
+
 class EdibleSchema(Schema):
     id = fields.Int(dump_only=True)
     kalori = fields.Float()

@@ -1,6 +1,10 @@
 import os
+import random
+import string
 from urllib.parse import urljoin
-from models import MushroomModel
+
+from flask_jwt_extended import get_jwt_identity
+from models import UserMushroomModel
 from schemas import MushroomSchema
 from util.config import db
 from flask import jsonify
@@ -15,26 +19,47 @@ class UserMushroomService:
         pass
 
     def post_mushroom(self, mushroom_data, mushroom_image):
-        # current_user = get_jwt_identity()
+        current_user = get_jwt_identity()
+        
         try:
-            if mushroom_image:  # Pastikan ada gambar yang diunggah
-                # Simpan file gambar ke sistem penyimpanan (misalnya: direktori lokal)
-                image_path = os.path.join('static', mushroom_image.filename)
-                print(image_path)
-                domain = "http://localhost:5000/"
+            if mushroom_image: 
+                # Generate random string for unique identifier
+                random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
 
-                # Menggabungkan path dengan string domain
-                
+                # Extract original filename and extension
+                original_filename, file_extension = os.path.splitext(mushroom_image.filename)
+
+                # Construct new filename pattern
+                new_filename = f"{original_filename}_user_{current_user}_{random_string}{file_extension}"
+
+                # Specify upload directory
+                upload_folder = os.path.join('static', 'upload')
+
+                # Create upload directory if it doesn't exist
+                if not os.path.exists(upload_folder):
+                    os.makedirs(upload_folder)
+
+                # Save the image to the upload directory with the new filename
+                image_path = os.path.join(upload_folder, new_filename)
                 mushroom_image.save(image_path)
-                
-                # Ubah path ke URL
-                temp_path = url_for('static', filename=mushroom_image.filename)
+
+                # Generate URL for the uploaded image
+                domain = "http://localhost:5000/"
+                temp_path = os.path.join('static/upload/', new_filename)
                 mushroom_data['path'] = urljoin(domain, temp_path)
+                mushroom_data['name'] = new_filename
 
             else:
                 # Jika tidak ada gambar yang diunggah, hentikan program dan kembalikan respons yang sesuai
                 abort(400, message="No image uploaded")
-            new_mushroom = MushroomModel(**mushroom_data)
+
+            # Create a new instance of MushroomModel with mushroom_data
+            new_mushroom = UserMushroomModel(**mushroom_data)
+
+            # Add user_id to the new_mushroom
+            new_mushroom.user_id = current_user
+
+            # Add the new_mushroom to the session and commit
             db.session.add(new_mushroom)
             db.session.commit()
 
@@ -46,6 +71,40 @@ class UserMushroomService:
             # Kesalahan umum saat menyisipkan item
             print("SQLAlchemy Error:", str(e))  # Cetak detail kesalahan
             abort(500, message="An error occurred while inserting item: " + str(e))
+
+
+    # def post_mushroom(self, mushroom_data, mushroom_image):
+    #     current_user = get_jwt_identity()
+        
+    #     try:
+    #         if mushroom_image: 
+    #             image_path = os.path.join('static', mushroom_image.filename)
+                
+    #             domain = "http://localhost:5000/"
+
+    #             # Menggabungkan path dengan string domain
+                
+    #             mushroom_image.save(image_path)
+                
+    #             # Ubah path ke URL
+    #             temp_path = url_for('static', filename=mushroom_image.filename)
+    #             mushroom_data['path'] = urljoin(domain, temp_path)
+
+    #         else:
+    #             # Jika tidak ada gambar yang diunggah, hentikan program dan kembalikan respons yang sesuai
+    #             abort(400, message="No image uploaded")
+    #         new_mushroom = MushroomModel(**mushroom_data)
+    #         db.session.add(new_mushroom)
+    #         db.session.commit()
+
+    #         return {"error": False, "message": "Mushroom added successfully"}
+    #     except IntegrityError as e:
+    #         # Jika user_id tidak valid
+    #         abort(400, message="User id not valid"+ str(e))
+    #     except SQLAlchemyError as e:
+    #         # Kesalahan umum saat menyisipkan item
+    #         print("SQLAlchemy Error:", str(e))  # Cetak detail kesalahan
+    #         abort(500, message="An error occurred while inserting item: " + str(e))
 
     def get_all_mushroom(self):
         try:

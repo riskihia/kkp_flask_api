@@ -1,14 +1,9 @@
 from flask.views import MethodView
 from flask import request
+from flask_jwt_extended import jwt_required
 from flask_smorest import Blueprint
-from schemas import MushroomSchema
+from schemas import MushroomSchema, UserMushroomSchema
 from util.example_response import GetAllMushroom, PostMushroom
-# from util.example_response import (
-#     GetLahanExample,
-#     PostLahanExample,
-#     DeleteLahanExample,
-#     GetLahanIdExample,
-# )
 from service.user_mushroom_service import UserMushroomService
 # from flask_jwt_extended import jwt_required
 
@@ -24,8 +19,8 @@ class Mushroom(MethodView):
     def get(self):
         return UserMushroomService().get_all_mushroom()
 
-    # @jwt_required()
-    @user_mushroom_blp.arguments(MushroomSchema)
+    @jwt_required()
+    @user_mushroom_blp.arguments(UserMushroomSchema, location='form')
     @user_mushroom_blp.response(200, example=PostMushroom)
     @user_mushroom_blp.response(422, example=None)
     def post(self, mushroom_data):
