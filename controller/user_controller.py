@@ -8,7 +8,7 @@ from flask_jwt_extended import (
     jwt_required,
 )
 from service.user_service import UserService
-
+from util.example_response import RegisterSuccess, LoginSuccess
 from util.config import db
 
 from models import UserModel
@@ -22,6 +22,8 @@ user_blp = Blueprint("Users", "users", description="Operations on users")
 @user_blp.route("/register")
 class UserRegister(MethodView):
     @user_blp.arguments(UserSchema)
+    @user_blp.response(200, example=RegisterSuccess)
+    @user_blp.response(422, example=None)
     def post(self, store_data):
         # return store_data
         return UserService.register(store_data)
@@ -30,6 +32,8 @@ class UserRegister(MethodView):
 @user_blp.route("/login")
 class UserLogin(MethodView):
     @user_blp.arguments(UserSchema)
+    @user_blp.response(200, example=LoginSuccess)
+    @user_blp.response(422, example=None)
     def post(self, user_data):
         return UserService.login(user_data)
         
@@ -37,6 +41,8 @@ class UserLogin(MethodView):
 @user_blp.route("/logout")
 class UserLogout(MethodView):
     @jwt_required()
+    @user_blp.response(200, example=LoginSuccess)
+    @user_blp.response(422, example=None)
     def post(self):
         jti = get_jwt()["jti"]
         BLOCKLIST.add(jti)

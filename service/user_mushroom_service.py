@@ -4,8 +4,9 @@ import string
 from urllib.parse import urljoin
 
 from flask_jwt_extended import get_jwt_identity
+from sqlalchemy import desc
 from models import UserMushroomModel
-from schemas import MushroomSchema
+from schemas import GetUserMushroomSchema
 from util.config import db
 from flask import jsonify
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -73,49 +74,20 @@ class UserMushroomService:
             abort(500, message="An error occurred while inserting item: " + str(e))
 
 
-    # def post_mushroom(self, mushroom_data, mushroom_image):
-    #     current_user = get_jwt_identity()
-        
-    #     try:
-    #         if mushroom_image: 
-    #             image_path = os.path.join('static', mushroom_image.filename)
-                
-    #             domain = "http://localhost:5000/"
-
-    #             # Menggabungkan path dengan string domain
-                
-    #             mushroom_image.save(image_path)
-                
-    #             # Ubah path ke URL
-    #             temp_path = url_for('static', filename=mushroom_image.filename)
-    #             mushroom_data['path'] = urljoin(domain, temp_path)
-
-    #         else:
-    #             # Jika tidak ada gambar yang diunggah, hentikan program dan kembalikan respons yang sesuai
-    #             abort(400, message="No image uploaded")
-    #         new_mushroom = MushroomModel(**mushroom_data)
-    #         db.session.add(new_mushroom)
-    #         db.session.commit()
-
-    #         return {"error": False, "message": "Mushroom added successfully"}
-    #     except IntegrityError as e:
-    #         # Jika user_id tidak valid
-    #         abort(400, message="User id not valid"+ str(e))
-    #     except SQLAlchemyError as e:
-    #         # Kesalahan umum saat menyisipkan item
-    #         print("SQLAlchemy Error:", str(e))  # Cetak detail kesalahan
-    #         abort(500, message="An error occurred while inserting item: " + str(e))
-
+   
     def get_all_mushroom(self):
         try:
-            mushroom = MushroomModel.query.filter(MushroomModel.deleted_at.is_(None)).all()
+            mushrooms = UserMushroomModel.query \
+            .filter(UserMushroomModel.deleted_at.is_(None)) \
+            .order_by(desc(UserMushroomModel.created_at)) \
+            .all()
 
-            mushroom_schema = MushroomSchema(many=True)
+            mushroom_schema = GetUserMushroomSchema(many=True)
 
             response_data = {
                 "error": False,
                 "message": "Data mushroom fetched successfully",
-                "data": mushroom_schema.dump(mushroom),
+                "data": mushroom_schema.dump(mushrooms),
             }
             return jsonify(response_data), 200
         except Exception as e:

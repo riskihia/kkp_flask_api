@@ -8,6 +8,16 @@ class UserSchema(Schema):
 
 class UserMushroomSchema(Schema):
     name = fields.Str(required=True)
+    image = fields.Raw(type='file')
+
+class GetUserMushroomSchema(Schema):
+    id = fields.Int(dump_only=True)
+    name = fields.Str()
+    path = fields.Str()
+    isEdible = fields.Str()
+    description = fields.Str()
+    user_id = fields.Int(dump_only=True)
+
 
 class EdibleSchema(Schema):
     id = fields.Int(dump_only=True)

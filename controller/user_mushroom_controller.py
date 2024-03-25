@@ -3,7 +3,7 @@ from flask import request
 from flask_jwt_extended import jwt_required
 from flask_smorest import Blueprint
 from schemas import MushroomSchema, UserMushroomSchema
-from util.example_response import GetAllMushroom, PostMushroom
+from util.example_response import GetAllUserMushroom, PostMushroom
 from service.user_mushroom_service import UserMushroomService
 # from flask_jwt_extended import jwt_required
 
@@ -14,8 +14,8 @@ user_mushroom_blp = Blueprint(
 
 @user_mushroom_blp.route("/user-mushroom")
 class Mushroom(MethodView):
-    # @jwt_required()
-    @user_mushroom_blp.response(200, example=GetAllMushroom)
+    @jwt_required()
+    @user_mushroom_blp.response(200, example=GetAllUserMushroom)
     def get(self):
         return UserMushroomService().get_all_mushroom()
 

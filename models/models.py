@@ -32,7 +32,7 @@ class UserModel(db.Model, TimeStamp):
     password = Column(Text, nullable=False)
     token = Column(Text, nullable=True)
 
-    users_mushrooms = db.relationship("UserMushroomModel", back_populates="user", lazy="dynamic")
+    users_mushrooms = db.relationship("UserMushroomModel", back_populates="user", lazy="dynamic", cascade="all, delete")
 
 class UserMushroomModel(db.Model, TimeStamp):
     __tablename__ = "user_mushrooms"
@@ -53,8 +53,8 @@ class MushroomModel(db.Model, TimeStamp):
     name = Column(String(80), unique=True, nullable=False)
     type = Column(String(80), nullable=False)
 
-    edibles = db.relationship("EdibleModel", back_populates="mushroom", lazy="dynamic")
-    inedibles = db.relationship("InedibleModel", back_populates="mushroom", lazy="dynamic")
+    edibles = db.relationship("EdibleModel", back_populates="mushroom", lazy="dynamic", cascade="all, delete")
+    inedibles = db.relationship("InedibleModel", back_populates="mushroom", lazy="dynamic", cascade="all, delete")
     
 
 class EdibleModel(db.Model, TimeStamp):
