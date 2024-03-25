@@ -32,6 +32,8 @@ class UserModel(db.Model, TimeStamp):
     password = Column(Text, nullable=False)
     token = Column(Text, nullable=True)
 
+    users_mushrooms = db.relationship("UserMushroomModel", back_populates="user", lazy="dynamic")
+
 class UserMushroomModel(db.Model, TimeStamp):
     __tablename__ = "user_mushrooms"
 
@@ -40,7 +42,9 @@ class UserMushroomModel(db.Model, TimeStamp):
     path = Column(String(80), nullable=True)
     isEdible = Column(Boolean, nullable=True)
     description = Column(Text, nullable=True)
-
+    
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user = db.relationship("UserModel", back_populates="users_mushrooms")
 
 class MushroomModel(db.Model, TimeStamp):
     __tablename__ = "mushrooms"
