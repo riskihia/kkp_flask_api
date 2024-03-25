@@ -1,5 +1,6 @@
 note.txt
 venv/
 .venv/
+.env
 __pycache__/
 .flaskenv

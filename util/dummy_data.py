@@ -17,8 +17,8 @@ def CekTabel(nama_table):
 
 
 def populate_data():
-    # if CekTabel("mushrooms") and not has_data(MushroomModel):
-    #     insert_mushrooms()
+    if CekTabel("mushrooms") and not has_data(MushroomModel):
+        insert_mushrooms()
     # if CekTabel("edibles") and not has_data(EdibleModel):
     #     insert_edible()
     # if CekTabel("inedibles") and not has_data(InedibleModel):

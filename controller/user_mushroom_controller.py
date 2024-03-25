@@ -13,7 +13,7 @@ from service.user_mushroom_service import UserMushroomService
 # from flask_jwt_extended import jwt_required
 
 user_mushroom_blp = Blueprint(
-    "user mushroom", __name__, description="Option in User Mushroom"
+    "User Mushrooms", __name__, description="Option on User Mushroom"
 )
 
 
