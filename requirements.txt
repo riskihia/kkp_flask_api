@@ -11,3 +11,4 @@ pytz
 flask-migrate
 tensorflow
 Pillow
+numpy
