@@ -9,3 +9,5 @@ passlib
 pymysql
 pytz
 flask-migrate
+tensorflow
+Pillow

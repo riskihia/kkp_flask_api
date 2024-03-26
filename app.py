@@ -32,6 +32,7 @@ def create_app():
         user_controller.user_blp,
         user_mushroom_controller.user_mushroom_blp,
         mushroom_controller.mushroom_blp,
+        predict_mushroom_controller.predict_mushroom_blp,
     ]
 
     for bp in blueprints:
