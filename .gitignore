@@ -4,4 +4,4 @@ venv/
 .env
 __pycache__/
 .flaskenv
-*.h5
+ml/*
