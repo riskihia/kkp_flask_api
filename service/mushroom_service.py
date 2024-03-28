@@ -45,12 +45,12 @@ class MushroomService:
 
             # Fetch content based on mushroom type
             content = None
-            if mushroom.type == 'edible':
+            if mushroom.type.lower() == 'edible':
                 edible = EdibleModel.query.filter_by(mushroom_id=mushroom.id).first()
                 if edible:
                     edible_schema = EdibleSchema()
                     content = edible_schema.dump(edible)
-            elif mushroom.type == 'inedible':
+            elif mushroom.type.lower() == 'inedible':
                 inedible = InedibleModel.query.filter_by(mushroom_id=mushroom.id).first()
                 if inedible:
                     inedible_schema = InedibleSchema()

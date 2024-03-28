@@ -6,7 +6,7 @@ from urllib.parse import urljoin
 from flask_jwt_extended import get_jwt_identity
 from sqlalchemy import desc
 from models import UserMushroomModel
-from schemas import GetUserMushroomSchema
+from schemas import GetUserMushroomSchema, UserMushroomSchema , DetailUserMushroomSchema
 from util.config import db
 from flask import jsonify
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
@@ -28,10 +28,9 @@ class UserMushroomService:
                 random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
 
                 # Extract original filename and extension
-                original_filename, file_extension = os.path.splitext(mushroom_image.filename)
-
-                # Construct new filename pattern
-                new_filename = f"{original_filename}_user_{current_user}_{random_string}{file_extension}"
+                file_extension = os.path.splitext(mushroom_image.filename)[1]
+                new_filename = f"{mushroom_data['name']}_{random_string}{file_extension}"
+                # return "selesai"
 
                 # Specify upload directory
                 upload_folder = os.path.join('static', 'upload')
@@ -74,7 +73,27 @@ class UserMushroomService:
             abort(500, message="An error occurred while inserting item: " + str(e))
 
 
-   
+    def find_mushroom(self, name):
+        current_user = get_jwt_identity()
+        try:
+            detail_user_mushroom_schema = DetailUserMushroomSchema()
+            mushrooms = UserMushroomModel.query.filter(
+                UserMushroomModel.name.like(f'%{name}%'), 
+                UserMushroomModel.user_id == current_user
+                ).first()
+            if mushrooms:
+                response_data = {
+                    "error": False,
+                    "message": "Data mushroom fetched successfully",
+                    "data": detail_user_mushroom_schema.dump(mushrooms),
+                }
+                return jsonify(response_data), 200
+            else:
+                # Proses jika jamur tidak ditemukan
+                return jsonify({"message": "No mushrooms found with that name for the current user"}), 404
+        except Exception as e:
+            print(e)
+
     def get_all_mushroom(self):
         try:
             mushrooms = UserMushroomModel.query \

@@ -27,5 +27,13 @@ class Mushroom(MethodView):
         mushroom_data = dict(request.form)
         mushroom_image = request.files.get('image')  # Ambil file gambar dari permintaan
         return UserMushroomService().post_mushroom(mushroom_data, mushroom_image)
+
+@user_mushroom_blp.route("/user-mushroom/<string:name>")
+class Mushroom(MethodView):
+    @jwt_required()
+    @user_mushroom_blp.response(200)
+    def get(self, name):
+        return UserMushroomService().find_mushroom(name)
+
     
 

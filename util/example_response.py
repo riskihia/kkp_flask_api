@@ -1,4 +1,26 @@
 
+PredictMushroom = {
+    "data": {
+        "content": {
+            "id": 23,
+            "kalori": None,
+            "karbohidrat": None,
+            "lemak": None,
+            "manfaat_kesehatan": "",
+            "mineral": "zat besi,kalsium,zink",
+            "penggunaan_kuliner": "dipanggang,ditumis,dimasak dalam sup",
+            "protein": "tinggi",
+            "vitamin": "B,D"
+        },
+        "deskripsi": "Tiram, juga dikenal sebagai jamur tiram, memiliki bentuk yang menyerupai kerang. Mereka memiliki tudung berwarna putih hingga abu-abu dengan pangkalan tudung yang lebar.",
+        "id": 41,
+        "name": "tiram",
+        "type": "Edible"
+    },
+    "error": False,
+    "message": "Data mushroom predicted successfully"
+}
+
 GetAllMushroom = {
     "data": [
         {

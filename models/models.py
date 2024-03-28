@@ -38,7 +38,8 @@ class UserMushroomModel(db.Model, TimeStamp):
     __tablename__ = "user_mushrooms"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), unique=True, nullable=False)
+    name = Column(String(250), unique=True, nullable=False)
+    jenis_jamur = Column(String(250))
     path = Column(String(250), nullable=True)
     isEdible = Column(Boolean, nullable=True)
     description = Column(Text, nullable=True)
@@ -50,8 +51,9 @@ class MushroomModel(db.Model, TimeStamp):
     __tablename__ = "mushrooms"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(80), unique=True, nullable=False)
-    type = Column(String(80), nullable=False)
+    name = Column(String(250), unique=True, nullable=False)
+    deskripsi = Column(Text, nullable=True)
+    type = Column(String(250), nullable=False)
 
     edibles = db.relationship("EdibleModel", back_populates="mushroom", lazy="dynamic", cascade="all, delete")
     inedibles = db.relationship("InedibleModel", back_populates="mushroom", lazy="dynamic", cascade="all, delete")
@@ -61,11 +63,15 @@ class EdibleModel(db.Model, TimeStamp):
     __tablename__ = "edibles"
 
     id = Column(Integer, primary_key=True)
-    kalori = Column(Double, nullable=True)
-    lemak = Column(Double, nullable=True)
-    natrium = Column(Double, nullable=True)
-    kalium = Column(Double, nullable=True)
-    karbohidrat = Column(Double, nullable=True)
+    kalori = Column(String(250), nullable=True)
+    lemak = Column(String(250), nullable=True)
+    protein = Column(String(250), nullable=True)
+    karbohidrat = Column(String(250), nullable=True)
+    mineral = Column(String(250), nullable=True)
+    vitamin = Column(String(250), nullable=True)
+    penggunaan_kuliner = Column(Text, nullable=True)
+    manfaat_kesehatan = Column(Text, nullable=True)
+    
 
     mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
     mushroom = db.relationship("MushroomModel", back_populates="edibles")
@@ -73,8 +79,8 @@ class EdibleModel(db.Model, TimeStamp):
 class InedibleModel(db.Model, TimeStamp):
     __tablename__ = "inedibles"
     id = Column(Integer, primary_key=True)
-    poison_name = Column(String(80), nullable=True)
-    amount = Column(Double, nullable=True)
+    toksisitas = Column(Text, nullable=True)
+    gejala = Column(Text, nullable=True)
 
     mushroom_id = Column(Integer, ForeignKey("mushrooms.id"), nullable=False)
     mushroom = db.relationship("MushroomModel", back_populates="inedibles")
