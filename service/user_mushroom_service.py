@@ -29,7 +29,8 @@ class UserMushroomService:
 
                 # Extract original filename and extension
                 file_extension = os.path.splitext(mushroom_image.filename)[1]
-                new_filename = f"{mushroom_data['name']}_{random_string}{file_extension}"
+                image_name = mushroom_data['name'].replace(' ', '_')
+                new_filename = f"{image_name}_{random_string}{file_extension}"
                 # return "selesai"
 
                 # Specify upload directory

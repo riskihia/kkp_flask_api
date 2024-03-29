@@ -10,6 +10,7 @@ from flask_jwt_extended import (
 from service.user_service import UserService
 from util.example_response import RegisterSuccess, LoginSuccess
 from util.config import db
+from schemas import UserSchema
 
 from models import UserModel
 from schemas import UserSchema
@@ -59,8 +60,14 @@ class User(MethodView):
 
     @jwt_required()
     def get(self, user_id):
+        user_schema = UserSchema()
         user = UserModel.query.get_or_404(user_id)
-        return user
+        response_data = {
+            "error": False,
+            "message": "Data user fetched successfully",
+            "data": user_schema.dump(user),
+        }
+        return jsonify(response_data), 200
 
     @jwt_required()
     def delete(self, user_id):
