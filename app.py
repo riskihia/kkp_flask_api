@@ -7,10 +7,12 @@ import pytz, os
 from util.config import db, Config
 from util import jwt_config
 from util.dummy_data import populate_data
+from flask_cors import CORS
 from schemas import UserSchema, MushroomSchema
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object(Config)
 
     @app.before_request

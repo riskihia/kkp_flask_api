@@ -64,7 +64,11 @@ class UserMushroomService:
             db.session.add(new_mushroom)
             db.session.commit()
 
-            return {"error": False, "message": "Mushroom added successfully"}
+            response_data = {
+                "error": False,
+                "message": "Data mushroom fetched successfully",
+            }
+            return jsonify(response_data), 200
         except IntegrityError as e:
             # Jika user_id tidak valid
             abort(400, message="User id not valid"+ str(e))
@@ -96,11 +100,9 @@ class UserMushroomService:
             print(e)
 
     def get_all_mushroom(self):
+        current_user = get_jwt_identity()
         try:
-            mushrooms = UserMushroomModel.query \
-            .filter(UserMushroomModel.deleted_at.is_(None)) \
-            .order_by(desc(UserMushroomModel.created_at)) \
-            .all()
+            mushrooms = UserMushroomModel.query.filter(UserMushroomModel.deleted_at.is_(None),UserMushroomModel.user_id == current_user).order_by(desc(UserMushroomModel.created_at)).all()
 
             mushroom_schema = GetUserMushroomSchema(many=True)
 

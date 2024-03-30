@@ -12,3 +12,4 @@ flask-migrate
 tensorflow
 Pillow
 numpy
+flask-cors

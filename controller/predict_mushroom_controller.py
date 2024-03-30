@@ -45,6 +45,7 @@ class Predict(MethodView):
         try:
             # Constructing the absolute path to the image
             image_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'upload', data["image_name"])
+            image_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'upload', data["image_name"])
 
             # Opening the image
             with open(image_path, 'rb') as image_file:
