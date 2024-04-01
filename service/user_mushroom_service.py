@@ -66,7 +66,7 @@ class UserMushroomService:
 
             response_data = {
                 "error": False,
-                "message": "Data mushroom fetched successfully",
+                "message": "Data mushroom added successfully",
             }
             return jsonify(response_data), 200
         except IntegrityError as e:

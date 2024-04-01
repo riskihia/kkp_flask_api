@@ -29,43 +29,64 @@ dataset = {
       "gejala": "Gejalanya muncul dalam beberapa jam setelah konsumsi, seperti menyebabkan mual, muntah, kebingungan, seperti halusinasi, perubahan persepsi, dan gangguan koordinasi motorik."
    },
 
-   "armillaria_borealis": {
+   "amanita_rubescens": {
       "type": "inedible",
       "deskripsi": "Armillaria Borealis dikenal sebagai jamur honey fungus, adalah spesies jamur yang umumnya ditemukan di hutan-hutan boreal di wilayah utara.",
       "toksisitas": "Beracun jika tidak diproses atau dimasak dengan baik.",
       "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, kebingungan, seperti halusinasi, perubahan persepsi."
    },
 
-   "bjerkandera_adusta": {
-      "type": "inedible",
-      "deskripsi": "Bjerkandera adusta , juga dikenal sebagai smoky polypore, adalah jamur kayu yang umumnya ditemukan pada kayu yang membusuk, seperti batang pohon, cabang, dan tunggul.",
-      "toksisitas": "Beracun, jika tidak diproses atau dimasak dengan baik.",
-      "gejala": "Gejalanya mungkin tidak terlihat hingga 6-24 jam setelah konsumsi, tetapi dapat menyebabkan masalah pencernaan seperti mual, muntah, atau diare."
-   },
-
-   "chlorociboria_aeruginascens": {
-      "type": "inedible",
-      "deskripsi": "Chlorociboria aeruginascens adalah jamur cangkir biru-hijau yang indah. Jamur ini jarang memiliki tubuh buah yang terlihat, tetapi pewarnaan hijau yang dihasilkan oleh jamur ini pada kayu seringkali terlihat.",
-      "toksisitas": "Sangat beracun, mengandung Xylindein yang dapat merusak hati dan ginjal.",
-      "gejala": "Gejalanya mungkin tidak terlihat hingga 6-24 jam setelah konsumsi, tetapi dapat menyebabkan kegagalan organ dan kematian."
-   },
-
-   "daedaleopsis_tricolor": {
-      "type": "inedible",
-      "deskripsi": "Daedaleopsis tricolor adalah kelompok jamur beracun. Sering ditemukan pada kayu mati di hutan-hutan berdaun dan campuran. Jamur ini memiliki tudung yang berwarna coklat kemerahan hingga oranye dengan pola zonasi, dan porus berwarna putih hingga kekuningan di bagian bawah tudung.",
-      "toksisitas": "Beracun jika dimakan mentah atau kurang dimasak.",
-      "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, kebingungan, seperti halusinasi, perubahan persepsi."
-   },
-
-   "enoki": {
+   "Boletus Edulis": {
       "type": "Edible",
-      "deskripsi": "Jamur Enoki memiliki tubuh buah yang panjang dan ramping dengan tutup yang kecil dan panjang. Biasanya berwarna putih, tetapi bisa menjadi coklat muda ketika terkena cahaya.",
+      "deskripsi": "Boletus edulis atau jamur babi bayi (bahasa Inggris: penny bun, cep, porcino atau porcini) tersebar luas di belahan bumi utara di Eropa, Asia, dan Amerika Utara. Jamur ini tumbuh di hutan peluruh dan konifer dan perkebunan. Jamur ini salah satu jamur yang paling banyak dicari dan dikonsumsi di dunia. Jamur ini terkenal karena rasanya yang lezat dan teksturnya yang unik.",
+      "nutrisi": {
+         "protein": "tinggi",
+         "vitamin": ["B"],
+         "mineral": ["kalium", "Fosfor", "selenium "]
+      },
+      "penggunaanKuliner": [
+         "dimasak dalam sup", 
+         "sebagai campuran pasta atau risotto"
+      ]
+   },
+
+   "Calycina citrina": {
+      "type": "inedible",
+      "deskripsi": "Calycina citrina, umumnya dikenal sebagai cangkir peri kuning, adalah spesies fungi yang berasal dari keluarga Helotiaceae. Jamur ini berbentuk cangkir kecil berwarna kuning dengan diameter 3 mm, dan seringkali tidak memiliki tangkai, tubuh buahnya biasa berkelompok di atas kayu lapuk. Spesies ini umumnya ditemukan di Afrika Utara, Asia, Eropa, Amerika Utara, Amerika Tengah, dan Amerika Selatan.",
+      "toksisitas": "tidak beracun, namun tetap diperlukan kehati-hatian dalam identifikasi yang akurat serta disarankan untuk menghindari mengkonsumsi jamur ini.",
+      "gejala": "ruam kulit, gatal-gatal, atau masalah pencernaan."
+   },
+
+   "Cerioporus squamosus": {
+      "type": "Edible",
+      "deskripsi": "Cerioporus_squamosus atau Dryad’s saddle atau pelana Driad tergabung dalam famili Polyporaceae dan genus Cerioporus, cukup populer dengan julukan jamur punggung burung. Umumnya dimanfaatkan sebagai bahan pangan dan telah dibudidayakan di beberapa negara. Di alam, jamur ini umumnya tumbuh di kayu baik pada hutan ataupun daerah yang dekat dengan kegiatan manusia. ",
+      "nutrisi": {
+         "protein": "tinggi",
+         "karbohidrat": "tinggi",
+         "vitamin": ["B", "D"],
+         "mineral": ["kalsium", "kalium", "Fosfor", "natrium"]
+      },
+      "penggunaanKuliner": [
+         "ditumis", 
+         "dimasak dalam sup",
+         "dipanggang"
+      ]
+   },
+
+   "Flammulina velutipes": {
+      "type": "Edible",
+      "deskripsi": "Flammulina velutipes atau jamur Enoki memiliki tubuh buah yang panjang dan ramping dengan tutup yang kecil dan panjang. Biasanya berwarna putih, tetapi bisa menjadi coklat muda ketika terkena cahaya.",
       "nutrisi": {
          "kalori": "rendah",
          "vitamin": ["B", "D"],
          "mineral": ["zat besi", "kalsium", "potasium"]
       },
-      "penggunaanKuliner": ["sup", "tumis", "salad"]
+      "penggunaanKuliner": [
+         "dimasak dalam sup", 
+         "ditumis", 
+         "dipanggang", 
+         "salad"
+      ]
    },
 
    "ganoderma_applanatum": {
@@ -86,27 +107,18 @@ dataset = {
       ]
    },
      
-   "gyromitra_infula": {
+   "Fomes fomentarius": {
       "type": "inedible",
-      "deskripsi": "Gyromitra Infula atau False Morel memiliki bentuk yang agak mirip dengan morel asli, tetapi berbeda dalam struktur dan kandungan kimia. Mereka sering ditemukan di hutan-hutan konifer dan daerah-daerah beriklim sedang.",
-      "toksisitas": "Beracun, mengandung gyromitrin yang dapat merusak hati.",
-      "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, dan kerusakan hati."
+      "deskripsi": "Fomes fomentarius atau tirhau selampahan adalah spesies patogen tanaman jamur yang ditemukan di Eropa, Asia, Afrika, dan Amerika Utara. Jamur yang bentuknya mirip tapak kuda sering dimanfaatkan untuk membuat bahan kulit. Menurut penelitian jamur ini berpotensi besar diaplikasikan dalam produksi bahan multifungsi di masa depan. ",
+      "toksisitas": "tidak beracun, namun tetap diperlukan kehati-hatian dalam identifikasi yang akurat serta disarankan untuk menghindari mengkonsumsi jamur ini.",
+      "gejala": "penggunaan jamur ini dalam dosis tinggi atau dalam jangka waktu yang panjang dapat menyebabkan beberapa efek samping seperti gangguan pencernaan, reaksi alergi, interaksi obat, dan potensi risiko keracunan jika tidak disiapkan dengan benar."
    },
 
-   "kuping": {
-      "type": "Edible",
-      "deskripsi": "Jamur kuping memiliki bentuk yang menyerupai kuping manusia, dengan tudung yang tipis dan cembung. Mereka sering ditemukan tumbuh pada pohon-pohon yang telah mati di hutan-hutan.",
-      "nutrisi": {
-         "karbohidrat": "tinggi",
-         "protein": "moderat",
-         "vitamin": ["B", "C"],
-         "mineral": ["zat besi", "kalsium"]
-      },
-      "penggunaanKuliner": [
-         "dimasak dalam sup",
-         "ditumis",
-         "dimasak dalam masakan Tiongkok"
-      ]
+   "Gyromitra Gigas": {
+      "type": "inedible",
+      "deskripsi": "Gyromitra Gigas atau False Morel memiliki bentuk yang agak mirip dengan morel asli, tetapi berbeda dalam struktur dan kandungan kimia. Mereka sering ditemukan di hutan-hutan konifer dan daerah-daerah beriklim sedang.",
+      "toksisitas": "Sangat beracun, mengandung gyromitrin yang dapat merusak hati.",
+      "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, dan kerusakan hati."
    },
 
    "leccinum_aurantiacum":{
@@ -124,50 +136,37 @@ dataset = {
       ]
    },
 
-   "pleurotus_pulmonarius": {
+   "Paxillus involutus": {
+      "type": "inedible",
+      "deskripsi": "Paxillus involutus (atau Brown Roll-rim atau Poison Pax) adalah spesies jamur ektomikoriza yang tersebar luas, ditemukan di bawah beragam pohon, dan membentuk hubungan erat dengan akar pohon dari berbagai spesies. ",
+      "toksisitas": "Beracun, mengandung senyawa glikoprotein berbahaya bagi tubuh. ",
+      "gejala": "menyebabkan Autoimmune hemolytic anemia yang muncul beberapa tahun kemudian setelah menkonsumsi jamur,menyebabkan hemolisis yang parah, gagal ginjal, dan bahkan hingga menyebabkan kematian."
+   },
+   
+   "Pleurotus ostreatus": {
       "type": "Edible",
-      "deskripsi": "Jamur Tiram Coklat, jamur ini umumnya dikenal sebagai jamur tiram India, jamur tiram Italia, jamur tiram coklat atau jamur tiram paru-paru",
+      "deskripsi": "Pleurotus ostreatus atau jamur tiram sering dikenal dengan sebutan King Oyster Mushroom, adalah jamur pangan dari kelompok Basidiomycota dan termasuk kelas Homobasidiomycetes dengan ciri-ciri umum tubuh buah berwarna putih hingga krem dan tudungnya berbentuk setengah lingkaran mirip cangkang tiram dengan bagian tengah agak cekung. ",
       "nutrisi": {
          "protein": "tinggi",
-         "vitamin": ["B", "D"],
+         "karbohidrat": "rendah",
+         "vitamin": ["B", "C" ,"D"],
          "mineral": ["zat besi", "kalsium", "Fosfor", "zink"]
       },
       "penggunaanKuliner": ["dipanggang", "ditumis", "dimasak dalam sup"]
    },
-   
-   "suillus_grevillei": {
-      "type": "Edible",
-      "deskripsi": "Suillus grevillei, memiliki tudung berbentuk cembung dengan permukaan yang licin dan berwarna cokelat keabu-abuan hingga kekuningan, sering dianggap sebagai jamur mikoriza yang membentuk hubungan simbiosis dengan pohon-pohon konifer.",
-      "nutrisi": {
-         "karbohidrat": "rendah",
-         "protein": "tinggi",
-         "vitamin": ["B", "D"],
-         "mineral": ["zat besi", "selenium ", "kalium"]
-      },
-      "manfaatKesehatan": [
-         "meningkatkan sistem kekebalan tubuh",
-         "membantu kesehatan tulang",
-         "mencegah masalah pencernaan seperti sembelit"
-      ]
-   },
 
-   "tiram": {
-      "type": "Edible",
-      "deskripsi": "Tiram, juga dikenal sebagai jamur tiram, memiliki bentuk yang menyerupai kerang. Mereka memiliki tudung berwarna putih hingga abu-abu dengan pangkalan tudung yang lebar.",
-      "nutrisi": {
-         "protein": "tinggi",
-         "vitamin": ["B", "D"],
-         "mineral": ["zat besi", "kalsium", "zink"]
-      },
-      "penggunaanKuliner": ["dipanggang", "ditumis", "dimasak dalam sup"]
+   "Schizophyllum commune": {
+      "type": "inedible",
+      "deskripsi": "Schizophyllum commune atau jamur gerigit adalah spesies jamur dalam genus Schizophyllum . Jamur ini menyerupai kipas gelombang dari terumbu karang yang padat. Ia memiliki gerigit yang bentuknya bervariasi dari kuning krem hingga putih pucat.",
+      "toksisitas": "Beracun jika dimakan mentah atau kurang dimasak.",
+      "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, kebingungan, seperti halusinasi, perubahan persepsi."
    },
    
-   "trametes_hirsuta": {
+   "Trichaptum biforme": {
     "type": "inedible",
-    
-    "deskripsi": "Trametes hirsute adalah kelompok jamur beracun. Dikenal karena permukaan berbulu yang dimilikinya. Jamur ini biasanya ditemukan tumbuh pada kayu mati atau membusuk di hutan-hutan.",
-    "toksisitas": "Beracun jika dimakan mentah atau kurang dimasak.",
-    "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk mual, muntah, diare, kebingungan, seperti halusinasi, perubahan persepsi."
+    "deskripsi": "Jamur Violet-toothed Polypore (Trichaptum biforme) adalah jamur yang sangat umum di Amerika Utara yang tidak bisa dimakan atau dimanfaatkan secara medis, tetapi seringkali disalahartikan dengan jamur Turkey Tail (Trametes versicolor) yang memiliki manfaat medis yang kuat. Namun, perhatikan bagian bawahnya! Bagian bawah dari Violet-toothed Polypore memiliki gigi-gigi kecil dan sering berwarna ungu, memudar menjadi cokelat atau ungu saat penuaan.",
+    "toksisitas": "Beracun. ",
+    "gejala": "Gejalanya mungkin muncul setelah beberapa jam hingga beberapa hari setelah konsumsi, termasuk gangguan pencernaan seperti mual, muntah, dan diare, serta reaksi alergi seperti ruam kulit atau sesak napas pada beberapa individu. Meskipun jarang terjadi, keracunan juga mungkin terjadi dengan gejala seperti pusing, sakit kepala, atau masalah pernapasan."
  }
 }
 
@@ -175,13 +174,12 @@ dataset = {
 
 def edible_list():
     mushroom_list = [
-        "enoki",
+        "Boletus Edulis",
+        "Cerioporus squamosus",
+        "Flammulina velutipes",
         "ganoderma_applanatum",
-        "kuping",
         "leccinum_aurantiacum",
-        "pleurotus_pulmonarius",
-        "suillus_grevillei",
-        "tiram"
+        "Pleurotus ostreatus",
     ]
 
     return mushroom_list
@@ -190,11 +188,12 @@ def inedible_list():
     mushroom_list = [
         "armillaria_borealis",
         "amanita_muscaria",
-        "bjerkandera_adusta",
-        "chlorociboria_aeruginascens",
-        "daedaleopsis_tricolor",
-        "gyromitra_infula",
-        "trametes_hirsuta",
+        "Calycina citrina",
+        "Fomes fomentarius",
+        "Gyromitra Gigas",
+        "Paxillus involutus",
+        "Schizophyllum commune",
+        "Trichaptum biforme",
     ]
 
     return mushroom_list

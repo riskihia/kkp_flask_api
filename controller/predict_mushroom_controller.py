@@ -45,7 +45,6 @@ class Predict(MethodView):
         try:
             # Constructing the absolute path to the image
             image_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'upload', data["image_name"])
-            image_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'upload', data["image_name"])
 
             # Opening the image
             with open(image_path, 'rb') as image_file:
@@ -80,24 +79,12 @@ class Predict(MethodView):
 
             if mushroom.type.lower() == 'edible':
                 edible = EdibleModel.query.filter_by(mushroom_id = mushroom.id).first()
-                edible_schema = EdibleSchema()  #  karena Anda mengambil semua entri
-                # response_data = {
-                #     "error": False,
-                #     "message": "Hasil scan image " + data["image_name"],
-                #     "data": edible_schema.dump(edibles),  # serialize data dengan schema
-                # }
-                # return jsonify(response_data), 200
+                edible_schema = EdibleSchema() 
                 content = edible_schema.dump(edible)
                 
             else:
                 inedible = InedibleModel.query.filter_by(mushroom_id = mushroom.id).first()
-                inedible_schema = InedibleSchema()  #  karena Anda mengambil semua entri
-                # response_data = {
-                #     "error": False,
-                #     "message": "Hasil scan image " + data["image_name"],
-                #     "data": inedible_schema.dump(inedibles),  # serialize data dengan schema
-                # }
-                # return jsonify(response_data), 200
+                inedible_schema = InedibleSchema()
                 content = inedible_schema.dump(inedible)
         
             response_data = {
